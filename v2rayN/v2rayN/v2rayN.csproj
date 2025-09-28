@@ -20,6 +20,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ApplicationDefinition Include="App.xaml" />
 		<AdditionalFiles Include="app.manifest" />
 		<EmbeddedResource Include="Resources\KiNG.ico">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
