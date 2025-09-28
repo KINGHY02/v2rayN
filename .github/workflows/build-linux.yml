@@ -47,7 +47,7 @@ jobs:
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4.6.2
       with:
-        name: v2rayN-linux
+        name: KiNG-linux
         path: |
           ${{ github.workspace }}/v2rayN/Release/linux*
 
@@ -63,7 +63,7 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       if: github.event.inputs.release_tag != ''
       with:
-        file: ${{ github.workspace }}/v2rayN*.deb
+        file: ${{ github.workspace }}/KiNG*.deb
         tag: ${{ github.event.inputs.release_tag }}
         file_glob: true
         prerelease: true
@@ -78,7 +78,7 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       if: github.event.inputs.release_tag != ''
       with:
-        file: ${{ github.workspace }}/v2rayN*.AppImage
+        file: ${{ github.workspace }}/KiNG*.AppImage
         tag: ${{ github.event.inputs.release_tag }}
         file_glob: true
         prerelease: true
@@ -95,7 +95,7 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       if: github.event.inputs.release_tag != ''
       with:
-        file: ${{ github.workspace }}/v2rayN*.zip
+        file: ${{ github.workspace }}/KiNG*.zip
         tag: ${{ github.event.inputs.release_tag }}
         file_glob: true
         prerelease: true

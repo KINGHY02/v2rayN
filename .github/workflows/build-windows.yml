@@ -48,7 +48,7 @@ jobs:
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4.6.2
       with:
-        name: v2rayN-windows
+        name: KiNG-windows
         path: |
           ${{ github.workspace }}/v2rayN/Release/windows*
     
@@ -65,7 +65,7 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       if: github.event.inputs.release_tag != ''
       with:
-        file: ${{ github.workspace }}/v2rayN*.zip
+        file: ${{ github.workspace }}/KiNG*.zip
         tag: ${{ github.event.inputs.release_tag }}
         file_glob: true
         prerelease: true

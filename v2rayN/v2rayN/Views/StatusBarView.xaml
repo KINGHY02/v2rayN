@@ -105,9 +105,9 @@
 
         <tb:TaskbarIcon
             x:Name="tbNotify"
-            IconSource="/Resources/v2rayN.ico"
+            IconSource="/Resources/KiNG.ico"
             NoLeftClickDelay="True"
-            ToolTipText="v2rayN">
+            ToolTipText="KiNG">
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu Style="{StaticResource DefContextMenu}">
                     <MenuItem

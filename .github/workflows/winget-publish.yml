@@ -16,15 +16,15 @@ jobs:
       - name: Submit v2ray package to Windows Package Manager Community Repository
         run: |
 
-          $wingetPackage = "2dust.v2rayN"
+          $wingetPackage = "2dust.KiNG"
           $gitToken = "${{ secrets.PT_WINGET }}"
 
           $github = Invoke-RestMethod -uri "https://api.github.com/repos/2dust/v2rayN/releases" 
 
           $targetRelease = $github | Where-Object -Property prerelease -match 'False' | Select -First 1
           
-          $x64InstallerUrl = $targetRelease | Select -ExpandProperty assets -First 1 | Where-Object -Property name -match 'v2rayN-windows-64\.zip' | Select -ExpandProperty browser_download_url
-          $arm64InstallerUrl = $targetRelease | Select -ExpandProperty assets -First 1 | Where-Object -Property name -match 'v2rayN-windows-arm64\.zip' | Select -ExpandProperty browser_download_url
+          $x64InstallerUrl = $targetRelease | Select -ExpandProperty assets -First 1 | Where-Object -Property name -match 'KiNG-windows-64\.zip' | Select -ExpandProperty browser_download_url
+          $arm64InstallerUrl = $targetRelease | Select -ExpandProperty assets -First 1 | Where-Object -Property name -match 'KiNG-windows-arm64\.zip' | Select -ExpandProperty browser_download_url
           
           $ver = $targetRelease.tag_name
 

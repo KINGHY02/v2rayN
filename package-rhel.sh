@@ -529,7 +529,7 @@ build_for_arch() {
   export RID_DIR
 
   # Per-arch working area
-  local PKGROOT="v2rayN-publish"
+  local PKGROOT="KiNG-publish"
   local WORKDIR
   WORKDIR="$(mktemp -d)"
   trap '[[ -n "${WORKDIR:-}" ]] && rm -rf "$WORKDIR"' RETURN
@@ -556,8 +556,8 @@ build_for_arch() {
 
   # Optional icon
   local ICON_CANDIDATE
-  ICON_CANDIDATE="$(dirname "$PROJECT")/../v2rayN.Desktop/v2rayN.png"
-  [[ -f "$ICON_CANDIDATE" ]] && cp "$ICON_CANDIDATE" "$WORKDIR/$PKGROOT/v2rayn.png" || true
+  ICON_CANDIDATE="$(dirname "$PROJECT")/../v2rayN.Desktop/KiNG.png"
+  [[ -f "$ICON_CANDIDATE" ]] && cp "$ICON_CANDIDATE" "$WORKDIR/$PKGROOT/KiNG.png" || true
 
   # Prepare bin structure
   mkdir -p "$WORKDIR/$PKGROOT/bin/xray" "$WORKDIR/$PKGROOT/bin/sing_box"
@@ -603,13 +603,13 @@ build_for_arch() {
 # Ignore outdated LTTng dependencies incorrectly reported by the .NET runtime (to avoid installation failures)
 %global __requires_exclude ^liblttng-ust\.so\..*$
 
-Name:           v2rayN
+Name:           KiNG
 Version:        __VERSION__
 Release:        1%{?dist}
-Summary:        v2rayN (Avalonia) GUI client for Linux (x86_64/aarch64)
+Summary:        KiNG (Avalonia) GUI client for Linux (x86_64/aarch64)
 License:        GPL-3.0-only
-URL:            https://github.com/2dust/v2rayN
-BugURL:         https://github.com/2dust/v2rayN/issues
+URL:            https://github.com/yourcompany/KiNG
+BugURL:         https://github.com/yourcompany/KiNG/issues
 ExclusiveArch:  aarch64 x86_64
 Source0:        __PKGROOT__.tar.gz
 
@@ -618,11 +618,11 @@ Requires:       libX11, libXrandr, libXcursor, libXi, libXext, libxcb, libXrende
 Requires:       fontconfig, freetype, cairo, pango, mesa-libEGL, mesa-libGL, xdg-utils
 
 %description
-v2rayN Linux for Red Hat Enterprise Linux
+KiNG Linux for Red Hat Enterprise Linux
 Support vless / vmess / Trojan / http / socks / Anytls / Hysteria2 / Shadowsocks / tuic / WireGuard
 Support Red Hat Enterprise Linux / Fedora Linux / Rocky Linux / AlmaLinux / CentOS
 For more information, Please visit our website
-https://github.com/2dust/v2rayN
+https://github.com/yourcompany/KiNG
 
 %prep
 %setup -q -n __PKGROOT__
@@ -631,25 +631,25 @@ https://github.com/2dust/v2rayN
 # no build
 
 %install
-install -dm0755 %{buildroot}/opt/v2rayN
-cp -a * %{buildroot}/opt/v2rayN/
+install -dm0755 %{buildroot}/opt/KiNG
+cp -a * %{buildroot}/opt/KiNG/
 
 # Launcher (prefer native ELF first, then DLL fallback)
 install -dm0755 %{buildroot}%{_bindir}
-cat > %{buildroot}%{_bindir}/v2rayn << 'EOF'
+cat > %{buildroot}%{_bindir}/KiNG << 'EOF'
 #!/usr/bin/bash
 set -euo pipefail
-DIR="/opt/v2rayN"
+DIR="/opt/KiNG"
 
 # Prefer native apphost
-if [[ -x "$DIR/v2rayN" ]]; then exec "$DIR/v2rayN" "$@"; fi
+if [[ -x "$DIR/KiNG" ]]; then exec "$DIR/KiNG" "$@"; fi
 
 # DLL fallback
 for dll in v2rayN.Desktop.dll v2rayN.dll; do
   if [[ -f "$DIR/$dll" ]]; then exec /usr/bin/dotnet "$DIR/$dll" "$@"; fi
 done
 
-echo "v2rayN launcher: no executable found in $DIR" >&2
+echo "KiNG launcher: no executable found in $DIR" >&2
 ls -l "$DIR" >&2 || true
 exit 1
 EOF
@@ -657,21 +657,21 @@ chmod 0755 %{buildroot}%{_bindir}/v2rayn
 
 # Desktop file
 install -dm0755 %{buildroot}%{_datadir}/applications
-cat > %{buildroot}%{_datadir}/applications/v2rayn.desktop << 'EOF'
+cat > %{buildroot}%{_datadir}/applications/KiNG.desktop << 'EOF'
 [Desktop Entry]
 Type=Application
-Name=v2rayN
-Comment=v2rayN for Red Hat Enterprise Linux
-Exec=v2rayn
-Icon=v2rayn
+Name=KiNG
+Comment=KiNG for Red Hat Enterprise Linux
+Exec=KiNG
+Icon=KiNG
 Terminal=false
 Categories=Network;
 EOF
 
 # Icon
-if [ -f "%{_builddir}/__PKGROOT__/v2rayn.png" ]; then
+if [ -f "%{_builddir}/__PKGROOT__/KiNG.png" ]; then
   install -dm0755 %{buildroot}%{_datadir}/icons/hicolor/256x256/apps
-  install -m0644 %{_builddir}/__PKGROOT__/v2rayn.png %{buildroot}%{_datadir}/icons/hicolor/256x256/apps/v2rayn.png
+  install -m0644 %{_builddir}/__PKGROOT__/KiNG.png %{buildroot}%{_datadir}/icons/hicolor/256x256/apps/KiNG.png
 fi
 
 %post
@@ -683,10 +683,10 @@ fi
 /usr/bin/gtk-update-icon-cache -f %{_datadir}/icons/hicolor >/dev/null 2>&1 || true
 
 %files
-%{_bindir}/v2rayn
-/opt/v2rayN
-%{_datadir}/applications/v2rayn.desktop
-%{_datadir}/icons/hicolor/256x256/apps/v2rayn.png
+%{_bindir}/KiNG
+/opt/KiNG
+%{_datadir}/applications/KiNG.desktop
+%{_datadir}/icons/hicolor/256x256/apps/KiNG.png
 SPEC
 
   # Autostart injection (inside %install) and %files entry
@@ -699,8 +699,8 @@ SPEC
         print "cat > %{buildroot}/etc/xdg/autostart/v2rayn.desktop << '\''EOF'\''"
         print "[Desktop Entry]"
         print "Type=Application"
-        print "Name=v2rayN (Autostart)"
-        print "Exec=v2rayn"
+        print "Name=KiNG (Autostart)"
+print "Exec=KiNG"
         print "X-GNOME-Autostart-enabled=true"
         print "NoDisplay=false"
         print "EOF"
@@ -714,7 +714,7 @@ SPEC
       /^%files$/        {infiles=1}
       infiles && done==0 && $0 ~ /%{_datadir}\/icons\/hicolor\/256x256\/apps\/v2rayn\.png/ {
         print
-        print "%config(noreplace) /etc/xdg/autostart/v2rayn.desktop"
+        print "%config(noreplace) /etc/xdg/autostart/KiNG.desktop"
         done=1
         next
       }

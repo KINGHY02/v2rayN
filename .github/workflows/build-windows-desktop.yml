@@ -47,7 +47,7 @@ jobs:
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4.6.2
       with:
-        name: v2rayN-windows-desktop
+        name: KiNG-windows-desktop
         path: |
           ${{ github.workspace }}/v2rayN/Release/windows*
 
@@ -57,15 +57,15 @@ jobs:
       run: |
         chmod 755 package-release-zip.sh
         ./package-release-zip.sh $OutputArch $OutputPath64
-        mv "v2rayN-${OutputArch}.zip" "v2rayN-${OutputArch}-desktop.zip"
+        mv "KiNG-${OutputArch}.zip" "KiNG-${OutputArch}-desktop.zip"
         ./package-release-zip.sh $OutputArchArm $OutputPathArm64
-        mv "v2rayN-${OutputArchArm}.zip" "v2rayN-${OutputArchArm}-desktop.zip"
+        mv "KiNG-${OutputArchArm}.zip" "KiNG-${OutputArchArm}-desktop.zip"
 
     - name: Upload zip archive to release
       uses: svenstaro/upload-release-action@v2
       if: github.event.inputs.release_tag != ''
       with:
-        file: ${{ github.workspace }}/v2rayN*.zip
+        file: ${{ github.workspace }}/KiNG*.zip
         tag: ${{ github.event.inputs.release_tag }}
         file_glob: true
         prerelease: true
